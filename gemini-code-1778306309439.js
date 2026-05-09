@@ -1,0 +1,1 @@
+window.location.replace("intent:#Intent;action=android.settings.HOME_SETTINGS;package=com.android.settings;end");

