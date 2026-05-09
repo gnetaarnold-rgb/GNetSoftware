@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head><title>Execute Intent</title></head>
+<body>
+    <script>
+        // We use a delay to ensure the browser has fully loaded 
+        // the window context before attempting the jump.
+        setTimeout(function() {
+            window.location.replace("intent:#Intent;action=android.settings.HOME_SETTINGS;package=com.android.settings;end");
+        }, 500);
+    </script>
+    <p>Attempting to redirect to Home Settings... if nothing happens, the Intent Firewall is active.</p>
+</body>
+</html>
